@@ -22,4 +22,8 @@ export class LoginComponent implements OnInit {
   public exibirPainelCadastro(): void{
 	this.exibirPainel.emit('cadastro')
   }
+
+  public autenticar(): void{
+
+  }
 }
