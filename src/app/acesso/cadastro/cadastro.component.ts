@@ -34,5 +34,8 @@ export class CadastroComponent implements OnInit {
 		  this.formulario.value.senha)
 
 	  this.servicoAutenticacao.cadastrarUsuario(usuario)
+		.then( () => {
+			this.exibirPainelLogin()
+		})
   }
 }
