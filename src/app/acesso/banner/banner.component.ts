@@ -31,10 +31,21 @@ export class BannerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+	setTimeout(() => { this.logicaRotacao() },3000)
   }
-
-  public toogleEstadoAnimacao():void {
-	  this.estado = this.estado === 'visivel' ? 'escondido' : 'visivel'
+  public logicaRotacao(): void{
+	//Auxilia na exibição da próxima imagem
+	let idx: number
+	//ocultar
+	for( let i:number = 0; i <= 4 ; i++){
+		if( this.imagens[i].estado === 'visivel'){
+			this.imagens[i].estado = 'escondido'
+			idx = i === 4 ? 0 : i + 1
+			break
+		}
+	}
+	//exibir a próxima imagem
+	this.imagens[idx].estado = 'visivel'
+	setTimeout(() => { this.logicaRotacao() },3000)
   }
-
 }
