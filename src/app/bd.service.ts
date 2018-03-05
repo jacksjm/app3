@@ -30,4 +30,24 @@ export class Bd {
 			})
 
 	}
+	public consultaPublicacoes(email: string): any {
+		firebase.database().ref(`publicacoes/${btoa(email)}`)
+			.once('value')
+			.then( (snapshot: any) => {
+				let publicacoes: Array<any> = []
+
+				snapshot.forEach((childSnapshot: any) => {
+					let publicacao = childSnapshot.val()
+					//consultar a url da imagem
+					firebase.storage().ref()
+						.child(`imagens/${childSnapshot.key}`)
+						.getDownloadURL()
+						.then( (url: string) => {
+							publicacao.url_imagem = url
+							publicacoes.push(publicacao)
+						})
+				})
+				console.log(publicacoes)
+			})
+	}
 }
