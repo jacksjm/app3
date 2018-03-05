@@ -32,7 +32,7 @@ export class ServicoAutenticacao {
 					.then( (idToken: string) => {
 						this.token_id = idToken
 						localStorage.setItem('idToken', idToken)
-						this.router.navigate(['home'])
+						this.router.navigate(['/home'])
 					})
 			})
 			.catch((erro: Error) => console.log(erro))
@@ -43,5 +43,14 @@ export class ServicoAutenticacao {
 			this.token_id = localStorage.getItem('idToken')
 		}
 		return this.token_id !== undefined
+	}
+
+	public sair(): void {
+		firebase.auth().signOut()
+			.then( () => {
+				localStorage.removeItem('idToken')
+				this.token_id = undefined
+				this.router.navigate(['/'])
+			})
 	}
 }
