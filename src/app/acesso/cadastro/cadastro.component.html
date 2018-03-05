@@ -35,11 +35,14 @@
 		  formControlName="senha"
         >
       </div>
-      <button type="submit" class="btn btn-primary btn-sm btn-block">Cadastre-se</button>
+      <button type="submit" class="btn btn-primary btn-sm btn-block" [disabled]="!cadastroOk() ? 'disabled' : ''">Cadastre-se</button>
     </form>
     <hr />
 
     <p class="small text-center">Ao cadastrar-se, você concorda com nossos <b>Termos</b> e <b>Política de Privacidade</b>.</p>
+	<hr />
+
+    <p class="small text-danger text-center"> {{ this.error_msg }}</p>
 
   </div>
 </div>
