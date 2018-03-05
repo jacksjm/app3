@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable, Sanitizer } from '@angular/core'
 import { Progresso } from './progresso.service'
 
 import * as firebase from 'firebase'
@@ -44,7 +44,15 @@ export class Bd {
 						.getDownloadURL()
 						.then( (url: string) => {
 							publicacao.url_imagem = url
-							publicacoes.push(publicacao)
+
+							//consultar o nome do usuário da publicacao
+							firebase.database().ref(`usuario_detalhe/${btoa(email)}`)
+								.once('value')
+								.then((snapshot: any) => {
+									publicacao.nome_usuario = snapshot.val().usuario.nome_usuario
+									publicacoes.push(publicacao)
+
+								})
 						})
 				})
 				console.log(publicacoes)
