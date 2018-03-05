@@ -6,6 +6,7 @@ import { ServicoAutenticacao } from './autenticacao.service';
 import { RouterModule } from '@angular/router'
 import { ROUTES } from './app.routes'
 import { AutenticacaoGuard } from './autenticacao-guard.service';
+import { Bd } from './bd.service';
 
 import { AppComponent } from './app.component';
 import { AcessoComponent } from './acesso/acesso.component';
@@ -36,7 +37,8 @@ import { IncluirPublicacaoComponent } from './home/incluir-publicacao/incluir-pu
   ],
   providers: [
 	ServicoAutenticacao,
-	AutenticacaoGuard
+	AutenticacaoGuard,
+	Bd
   ],
   bootstrap: [AppComponent]
 })
