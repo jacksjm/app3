@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Bd } from '../../bd.service'
 import { Progresso } from '../../progresso.service'
@@ -14,8 +14,10 @@ import * as firebase from 'firebase'
   templateUrl: './incluir-publicacao.component.html',
   styleUrls: ['./incluir-publicacao.component.css']
 })
+
 export class IncluirPublicacaoComponent implements OnInit {
 
+  @Output() public atualizarTimeLine: EventEmitter<any> = new EventEmitter<any>()
   public email: string
   public imagem: any
 
@@ -52,6 +54,8 @@ export class IncluirPublicacaoComponent implements OnInit {
 			this.porcentagemUpload = Math.round(( this.progresso.estado.bytesTransferred / this.progresso.estado.totalBytes ) * 100)
 			if(this.progresso.status === 'concluido'){
 				this.progressoPublicacao = 'concluido'
+				//emitir um evento do componente parent (Home)
+				this.atualizarTimeLine.emit()
 				continua.next(false)
 			}
 		} )
