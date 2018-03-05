@@ -48,8 +48,6 @@ export class IncluirPublicacaoComponent implements OnInit {
 	acompanhamentoUpload
 		.takeUntil( continua )
 		.subscribe( () => {
-			console.log(this.progresso.status)
-			console.log(this.progresso.estado)
 			this.progressoPublicacao = 'andamento'
 			this.porcentagemUpload = Math.round(( this.progresso.estado.bytesTransferred / this.progresso.estado.totalBytes ) * 100)
 			if(this.progresso.status === 'concluido'){
