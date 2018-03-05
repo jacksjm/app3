@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ServicoAutenticacao } from '../autenticacao.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild('publicacoes') public publicacoes: any
+
+  constructor(private servicoAutenticacao: ServicoAutenticacao) { }
 
   ngOnInit() {
   }
-
+  public sair(): void {
+	this.servicoAutenticacao.sair()
+  }
+  public atualizarTimeLine(): void {
+	this.publicacoes.atualizarTimeLine()
+  }
 }
